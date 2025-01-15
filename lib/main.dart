@@ -1,3 +1,4 @@
+import 'package:fiscal_focus_app/screens/onboarding_screens.dart';
 import 'package:flutter/material.dart';
 
 void main(){
@@ -14,9 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: "Inter",
       ),
-      home: Scaffold(
-        body: Center(child: Text("My Name is Ishan", style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),),),
-      ),
+      home: OnboardingScreens(),
     );
   }
 }
