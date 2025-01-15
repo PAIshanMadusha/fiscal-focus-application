@@ -10,3 +10,4 @@ const Color kRed = Color.fromARGB(255, 139, 5, 5);
 const Color kYellow = Color.fromARGB(255, 179, 176, 4);
 const Color kLightYellow = Color.fromARGB(255, 245, 255, 111);
 const Color kOrange = Color.fromARGB(255, 204, 136, 33);
+const Color kTextFieldColor = Color.fromARGB(150, 205, 236, 235);
