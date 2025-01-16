@@ -1,3 +1,5 @@
+import 'package:fiscal_focus_app/screens/main_screen.dart';
+import 'package:fiscal_focus_app/services/user_service.dart';
 import 'package:fiscal_focus_app/utils/colors.dart';
 import 'package:fiscal_focus_app/utils/constance.dart';
 import 'package:fiscal_focus_app/widgets/custom_button.dart';
@@ -24,14 +26,14 @@ class _UserDataScreenState extends State<UserDataScreen> {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
 
-  @override    
-  void dispose(){
+  @override
+  void dispose() {
     _userNameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
-  }    
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -247,12 +249,33 @@ class _UserDataScreenState extends State<UserDataScreen> {
                         height: kSizedBoxValue * 2,
                       ),
                       GestureDetector(
-                        onTap: (){
-                          if(_fromKey.currentState!.validate()){
-                            String _userName = _userNameController.text;
-                            String _email = _emailController.text;
-                            String _password = _passwordController.text;
-                            String _confirmPassword = _confirmPasswordController.text;
+                        onTap: () async {
+                          if (_fromKey.currentState!.validate()) {
+                            String userName = _userNameController.text;
+                            String email = _emailController.text;
+                            String password = _passwordController.text;
+                            String confirmPassword =
+                                _confirmPasswordController.text;
+
+                            //Save Data
+                            await UserService.storeUserDetails(
+                              userName: userName,
+                              email: email,
+                              password: password,
+                              confirmPassword: confirmPassword,
+                              context: context,
+                            );
+                            //Navigate
+                            if (context.mounted) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder:(context) {
+                                    return MainScreen();
+                                  },
+                                ),
+                              );
+                            }
                           }
                         },
                         child: CustomButton(

@@ -1,7 +1,10 @@
 import 'package:fiscal_focus_app/screens/onboarding_screens.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main(){
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPreferences.getInstance();
   runApp(MyApp());
 }
 class MyApp extends StatelessWidget {
