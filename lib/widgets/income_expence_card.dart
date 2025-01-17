@@ -28,7 +28,7 @@ class _IncomeExpenceCardState extends State<IncomeExpenceCard> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           // ignore: deprecated_member_use
-          colors: [widget.bgColor, kOrange.withOpacity(0.8)],
+          colors: [widget.bgColor, const Color.fromARGB(255, 179, 255, 0).withOpacity(0.9)],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),
