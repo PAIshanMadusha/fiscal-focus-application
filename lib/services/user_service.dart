@@ -34,11 +34,21 @@ class UserService {
       err.toString();
     }
   }
-  //check userName
-  static Future <bool> checkUserName() async {
 
+  //check userName
+  static Future<bool> checkUserName() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     String? userName = pref.getString("userName");
     return userName != null;
+  }
+
+  //Get Username/ Email
+  static Future<Map<String, String>> getUserData() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+
+    String? userName = pref.getString("userName");
+    String? email = pref.getString("email");
+
+    return {"userName": userName!, "email": email!};
   }
 }

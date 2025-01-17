@@ -1,4 +1,4 @@
-import 'package:fiscal_focus_app/screens/main_screen.dart';
+import 'package:fiscal_focus_app/screens/main_screens/main_screen.dart';
 import 'package:fiscal_focus_app/services/user_service.dart';
 import 'package:fiscal_focus_app/utils/colors.dart';
 import 'package:fiscal_focus_app/utils/constance.dart';
