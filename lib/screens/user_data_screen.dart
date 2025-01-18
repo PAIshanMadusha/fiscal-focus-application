@@ -68,6 +68,7 @@ class _UserDataScreenState extends State<UserDataScreen> {
                           if (value!.isEmpty) {
                             return "Please Enter Your Name";
                           }
+                          return null;
                         },
                         decoration: InputDecoration(
                           fillColor: kTextFieldColor,
@@ -107,6 +108,7 @@ class _UserDataScreenState extends State<UserDataScreen> {
                           if (value!.isEmpty) {
                             return "Please Enter Your Email";
                           }
+                          return null;
                         },
                         decoration: InputDecoration(
                           fillColor: kTextFieldColor,
@@ -146,6 +148,7 @@ class _UserDataScreenState extends State<UserDataScreen> {
                           if (value!.isEmpty) {
                             return "Please Enter Your Password";
                           }
+                          return null;
                         },
                         obscureText: true,
                         decoration: InputDecoration(
@@ -186,6 +189,7 @@ class _UserDataScreenState extends State<UserDataScreen> {
                           if (value!.isEmpty) {
                             return "Please Enter Your Confirm Password";
                           }
+                          return null;
                         },
                         obscureText: true,
                         decoration: InputDecoration(
