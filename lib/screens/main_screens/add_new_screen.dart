@@ -2,7 +2,9 @@ import 'package:fiscal_focus_app/models/expence_model.dart';
 import 'package:fiscal_focus_app/models/income_model.dart';
 import 'package:fiscal_focus_app/utils/colors.dart';
 import 'package:fiscal_focus_app/utils/constance.dart';
+import 'package:fiscal_focus_app/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AddNewScreen extends StatefulWidget {
   const AddNewScreen({super.key});
@@ -20,6 +22,9 @@ class _AddNewScreenState extends State<AddNewScreen> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
+
+  DateTime _selectedDate = DateTime.now();
+  DateTime _selectedTime = DateTime.now();
 
   @override
   void dispose() {
@@ -151,7 +156,7 @@ class _AddNewScreenState extends State<AddNewScreen> {
                 ),
               ),
               Container(
-                height: MediaQuery.of(context).size.height * 0.6,
+                height: MediaQuery.of(context).size.height * 0.64,
                 margin: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height * 0.32),
                 decoration: BoxDecoration(
@@ -186,7 +191,7 @@ class _AddNewScreenState extends State<AddNewScreen> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: kWhite,
-                                width: 3,
+                                width: 2,
                               ),
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -245,7 +250,7 @@ class _AddNewScreenState extends State<AddNewScreen> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: kWhite,
-                                width: 3,
+                                width: 2,
                               ),
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -273,7 +278,7 @@ class _AddNewScreenState extends State<AddNewScreen> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: kWhite,
-                                width: 3,
+                                width: 2,
                               ),
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -302,7 +307,7 @@ class _AddNewScreenState extends State<AddNewScreen> {
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: kWhite,
-                                width: 3,
+                                width: 2,
                               ),
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -320,6 +325,149 @@ class _AddNewScreenState extends State<AddNewScreen> {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height: kSizedBoxValue,
+                        ),
+                        //Date
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                showDatePicker(
+                                  context: context,
+                                  firstDate: DateTime(2022),
+                                  lastDate: DateTime(2026),
+                                ).then((value) {
+                                  if (value != null) {
+                                    setState(() {
+                                      _selectedDate = value;
+                                    });
+                                  }
+                                });
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: kGrey,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: kDefaultPadding,
+                                    vertical: kDefaultPadding,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.calendar_month,
+                                        color: kWhite,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        "Select Date",
+                                        style: TextStyle(
+                                            color: kWhite,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Text(
+                              DateFormat.yMMMd().format(_selectedDate),
+                              style: TextStyle(
+                                color: kGrey,
+                                fontSize: 23,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: kSizedBoxValue,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.now(),
+                                ).then((value) {
+                                  if (value != null) {
+                                    setState(() {
+                                      _selectedTime = DateTime(
+                                        _selectedDate.year,
+                                        _selectedDate.month,
+                                        _selectedDate.day,
+                                        _selectedTime.hour,
+                                        _selectedTime.minute,
+                                      );
+                                    });
+                                  }
+                                });
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: kGrey,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: kDefaultPadding,
+                                    vertical: kDefaultPadding,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.timer_outlined,
+                                        color: kWhite,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        "Select Time",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                          color: kWhite,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Text(
+                              DateFormat.jm().format(_selectedTime),
+                              style: TextStyle(
+                                fontSize: 23,
+                                fontWeight: FontWeight.w800,
+                                color: kGrey,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: kSizedBoxValue,
+                        ),
+                        Divider(
+                          color: kWhite,
+                          thickness: 1,
+                        ),
+                        SizedBox(
+                          height: kSizedBoxValue,
+                        ),
+                        CustomButton(
+                          buttonName: "Add",
+                          buttonColor: kLightYellow,
+                        )
                       ],
                     ),
                   ),
