@@ -1,5 +1,6 @@
 import 'package:fiscal_focus_app/models/expence_model.dart';
 import 'package:fiscal_focus_app/models/income_model.dart';
+import 'package:fiscal_focus_app/services/expence_service.dart';
 import 'package:fiscal_focus_app/utils/colors.dart';
 import 'package:fiscal_focus_app/utils/constance.dart';
 import 'package:fiscal_focus_app/widgets/custom_button.dart';
@@ -7,7 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class AddNewScreen extends StatefulWidget {
-  const AddNewScreen({super.key});
+  final Function(Expence) addExpense;
+  const AddNewScreen({
+    super.key,
+    required this.addExpense,
+  });
 
   @override
   State<AddNewScreen> createState() => _AddNewScreenState();
@@ -464,9 +469,29 @@ class _AddNewScreenState extends State<AddNewScreen> {
                         SizedBox(
                           height: kSizedBoxValue,
                         ),
-                        CustomButton(
-                          buttonName: "Add",
-                          buttonColor: kLightYellow,
+                        //Add Button
+                        GestureDetector(
+                          onTap: () async {
+                            //Save Data
+                            List<Expence> loadedExpences =
+                                await ExpenceService().loadExpences();
+                            Expence expence = Expence(
+                              id: loadedExpences.length + 1,
+                              title: _titleController.text,
+                              amount: _amountController.text.isEmpty
+                                  ? 0
+                                  : double.parse(_amountController.text),
+                              category: _expenceCategory,
+                              date: _selectedDate,
+                              time: _selectedTime,
+                              description: _descriptionController.text,
+                            );
+                            widget.addExpense(expence);
+                          },
+                          child: CustomButton(
+                            buttonName: "Add",
+                            buttonColor: kLightYellow,
+                          ),
                         )
                       ],
                     ),

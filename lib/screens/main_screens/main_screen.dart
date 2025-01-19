@@ -1,8 +1,10 @@
+import 'package:fiscal_focus_app/models/expence_model.dart';
 import 'package:fiscal_focus_app/screens/main_screens/add_new_screen.dart';
 import 'package:fiscal_focus_app/screens/main_screens/budget_screen.dart';
 import 'package:fiscal_focus_app/screens/main_screens/home_screen.dart';
 import 'package:fiscal_focus_app/screens/main_screens/profile_screen.dart';
 import 'package:fiscal_focus_app/screens/main_screens/transaction_screen.dart';
+import 'package:fiscal_focus_app/services/expence_service.dart';
 import 'package:fiscal_focus_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -15,12 +17,40 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _currentScreenIndex = 2;
+
+  void fetchAllExpences() async {
+    List <Expence> loadedExpences = await ExpenceService().loadExpences();
+    setState(() {
+      expenceList = loadedExpences;
+    }); 
+  }
+  //Add a New Expence
+  void addNewExpences(Expence newExpence){
+    ExpenceService().saveExpences(newExpence, context);
+
+    //Update List
+    setState(() {
+      expenceList.add(newExpence);
+    });
+  }
+
+  @override
+  void initState() {
+    setState(() {
+      fetchAllExpences();
+    });
+    super.initState();
+  }
+
+  List <Expence> expenceList = [];
   @override
   Widget build(BuildContext context) {
     final List<Widget> screens = [
       HomeScreen(),
       TransactionScreen(),
-      AddNewScreen(),
+      AddNewScreen(
+        addExpense: addNewExpences,
+      ),
       BudgetScreen(),
       ProfileScreen(),
     ];
