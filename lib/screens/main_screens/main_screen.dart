@@ -1,10 +1,12 @@
 import 'package:fiscal_focus_app/models/expence_model.dart';
+import 'package:fiscal_focus_app/models/income_model.dart';
 import 'package:fiscal_focus_app/screens/main_screens/add_new_screen.dart';
 import 'package:fiscal_focus_app/screens/main_screens/budget_screen.dart';
 import 'package:fiscal_focus_app/screens/main_screens/home_screen.dart';
 import 'package:fiscal_focus_app/screens/main_screens/profile_screen.dart';
 import 'package:fiscal_focus_app/screens/main_screens/transaction_screen.dart';
 import 'package:fiscal_focus_app/services/expence_service.dart';
+import 'package:fiscal_focus_app/services/income_service.dart';
 import 'package:fiscal_focus_app/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -18,17 +20,40 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _currentScreenIndex = 2;
 
+  List<Income> incomeList = [];
+  List<Expence> expenceList = [];
+
+  //Function to Fetch Incomes
+  void fetchAllIncomes() async {
+    List<Income> loadedIncomes = await IncomeService().loadIncomes();
+    setState(() {
+      incomeList = loadedIncomes;
+    });
+  }
+
+  //Function to Fetch Expense
   void fetchAllExpences() async {
-    List <Expence> loadedExpences = await ExpenceService().loadExpences();
+    List<Expence> loadedExpences = await ExpenceService().loadExpences();
     setState(() {
       expenceList = loadedExpences;
-    }); 
+    });
   }
+
+  //Add a new Income
+  void addNewIncomes(Income newIncome) {
+    IncomeService().saveIcome(newIncome, context);
+
+    //Update Income List
+    setState(() {
+      incomeList.add(newIncome);
+    });
+  }
+
   //Add a New Expence
-  void addNewExpences(Expence newExpence){
+  void addNewExpences(Expence newExpence) {
     ExpenceService().saveExpences(newExpence, context);
 
-    //Update List
+  //Update Expense List
     setState(() {
       expenceList.add(newExpence);
     });
@@ -38,17 +63,18 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     setState(() {
       fetchAllExpences();
+      fetchAllIncomes();
     });
     super.initState();
   }
 
-  List <Expence> expenceList = [];
   @override
   Widget build(BuildContext context) {
     final List<Widget> screens = [
       HomeScreen(),
       TransactionScreen(),
       AddNewScreen(
+        addIncome: addNewIncomes,
         addExpense: addNewExpences,
       ),
       BudgetScreen(),
