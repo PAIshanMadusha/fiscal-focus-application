@@ -18,7 +18,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _currentScreenIndex = 2;
+  int _currentScreenIndex = 1;
 
   List<Income> incomeList = [];
   List<Expence> expenceList = [];
@@ -68,11 +68,22 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
   }
 
+  //Function to remove a expense
+  void removeExpense (Expence expence){
+    ExpenceService().deleteExpense(expence.id, context);
+    setState(() {
+      expenceList.remove(expence);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> screens = [
       HomeScreen(),
-      TransactionScreen(),
+      TransactionScreen(
+        expencesList: expenceList,
+        dismissedExpense: removeExpense,
+      ),
       AddNewScreen(
         addIncome: addNewIncomes,
         addExpense: addNewExpences,

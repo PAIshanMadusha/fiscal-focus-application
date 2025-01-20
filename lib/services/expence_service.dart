@@ -16,7 +16,7 @@ class ExpenceService {
       SharedPreferences pref = await SharedPreferences.getInstance();
       List<String>? existingExpences = pref.getStringList(_expenceKey);
 
-  //Covert the existing Expences to a list of Expence objects
+      //Covert the existing Expences to a list of Expence objects
       List<Expence> existingExpencesObjects = [];
 
       if (existingExpences != null) {
@@ -24,14 +24,14 @@ class ExpenceService {
             .map((e) => Expence.formJSON(json.decode(e)))
             .toList();
       }
-  //Add the new expence to the List
+      //Add the new expence to the List
       existingExpencesObjects.add(expence);
 
-  //Covert the list of expence objects back to a list of strings
+      //Covert the list of expence objects back to a list of strings
       List<String> updatedExpences =
           existingExpencesObjects.map((e) => json.encode(e.toJSON())).toList();
 
-  //Save the updated list of expence to shared preferences
+      //Save the updated list of expence to shared preferences
       await pref.setStringList(_expenceKey, updatedExpences);
 
       if (context.mounted) {
@@ -59,7 +59,7 @@ class ExpenceService {
     SharedPreferences pref = await SharedPreferences.getInstance();
     List<String>? existingExpences = pref.getStringList(_expenceKey);
 
-  //Convert the existing incomes to a list of income objects
+    //Convert the existing incomes to a list of income objects
     List<Expence> loadedExpences = [];
     if (existingExpences != null) {
       loadedExpences = existingExpences
@@ -67,8 +67,47 @@ class ExpenceService {
             (e) => Expence.formJSON(
               json.decode(e),
             ),
-          ).toList();
+          )
+          .toList();
     }
     return loadedExpences;
+  }
+
+  //Delete the Expense by dragging start to end
+  Future<void> deleteExpense(int id, BuildContext context) async {
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      List<String>? existingExpenses = pref.getStringList(_expenceKey);
+
+      //Covert to the expense object
+      List<Expence> existingExpensesObject = [];
+      if (existingExpenses != null) {
+        existingExpensesObject = existingExpenses
+            .map((e) => Expence.formJSON(json.decode(e)))
+            .toList();
+      }
+      //Remove the expences
+      existingExpensesObject.removeWhere((element) => element.id == id);
+      //Covert the lis of expence object back to a list of string
+      List<String> updatedExpences =
+          existingExpensesObject.map((e) => json.encode(e.toJSON())).toList();
+      //Save the updated list in shared preferences
+      await pref.setStringList(_expenceKey, updatedExpences);
+      //Show SnackBar
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Expense Deleted Succesfully!"),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Error $error"),
+        ),
+      );
+    }
   }
 }
