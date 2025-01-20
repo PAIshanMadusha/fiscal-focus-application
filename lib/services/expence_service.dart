@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ExpenceService {
-  //Expence List
-  List<Expence> expencesList = [];
-
+  
   //Key for String expences in shared preferences
   static const String _expenceKey = 'expences';
 
@@ -103,6 +101,7 @@ class ExpenceService {
         );
       }
     } catch (error) {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Error $error"),

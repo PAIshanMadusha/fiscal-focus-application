@@ -50,17 +50,57 @@ class IncomeService {
       }
     }
   }
-  //Load income from shared preferences
-  Future <List <Income>> loadIncomes () async {
 
+  //Load income from shared preferences
+  Future<List<Income>> loadIncomes() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     List<String>? existingIncomes = pref.getStringList(_incomeKey);
 
     //Convert the existing incomes to a list of income objects
     List<Income> loadedIncomes = [];
-    if(existingIncomes != null){
-      loadedIncomes = existingIncomes.map((e) => Income.formJSON(jsonDecode(e))).toList();
+    if (existingIncomes != null) {
+      loadedIncomes =
+          existingIncomes.map((e) => Income.formJSON(jsonDecode(e))).toList();
     }
     return loadedIncomes;
+  }
+
+  //Delete income by dragging start to end
+  Future<void> deleteIncome(int id, BuildContext context) async {
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      List<String>? existingIncomes = pref.getStringList(_incomeKey);
+
+      //convet to the income object
+      List<Income> existingIncomesObjets = [];
+      if (existingIncomes != null) {
+        existingIncomesObjets = existingIncomes
+            .map((e) => Income.formJSON(json.decode(e)))
+            .toList();
+      }
+      //Remove the income
+      existingIncomesObjets.removeWhere((element) => element.id == id);
+      //convert list of income object back to a list of string
+      List<String> updatedIncome =
+          existingIncomesObjets.map((e) => json.encode(e.toJSON())).toList();
+      //Save the update list in shared preferences
+      await pref.setStringList(_incomeKey, updatedIncome);
+      //Show snack
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Income Deleted Successfully"),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    } catch (error) {
+      // ignore: use_build_context_synchronously
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Error $error"),
+        ),
+      );
+    }
   }
 }

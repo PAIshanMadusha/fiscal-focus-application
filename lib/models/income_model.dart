@@ -18,8 +18,8 @@ final Map<IncomeCategory, String> incomeCategoryIamges = {
 //Colors
 final Map<IncomeCategory, Color> incomeCategoryColor = {
   IncomeCategory.freelance: const Color.fromARGB(252, 0, 20, 204),
-  IncomeCategory.passive: const Color.fromARGB(221, 255, 0, 200),
-  IncomeCategory.salery: const Color.fromARGB(255, 238, 255, 0),
+  IncomeCategory.passive: const Color.fromARGB(221, 255, 0, 191),
+  IncomeCategory.salery: const Color.fromARGB(255, 230, 214, 0),
   IncomeCategory.sales: const Color.fromARGB(255, 23, 192, 1),
 };
 
