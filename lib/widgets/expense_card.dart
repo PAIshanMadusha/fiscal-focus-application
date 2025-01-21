@@ -49,7 +49,7 @@ class ExpenseCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               // ignore: deprecated_member_use
-              color: expenceCategoriesColor[category]!.withOpacity(0.16),
+              color: expenceCategoriesColor[category]!.withOpacity(0.17),
             ),
             child: Image.asset(
               expenceCategoriesImages[category]!,

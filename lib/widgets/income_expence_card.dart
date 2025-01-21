@@ -72,12 +72,16 @@ class _IncomeExpenceCardState extends State<IncomeExpenceCard> {
                     fontSize: 17,
                   ),
                 ),
-                Text(
-                  "\$ ${widget.amount.toStringAsFixed(0)}",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w800,
-                    color: kWhite,
-                    fontSize: 17,
+                SizedBox(
+                  width: 80,
+                  child: Text(
+                    "\$ ${widget.amount.toString()}",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      color: kWhite,
+                      fontSize: 15,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],

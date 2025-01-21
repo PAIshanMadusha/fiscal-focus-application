@@ -49,7 +49,7 @@ class IncomeCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               // ignore: deprecated_member_use
-              color: incomeCategoryColor[category]!.withOpacity(0.16),
+              color: incomeCategoryColor[category]!.withOpacity(0.17),
             ),
             child: Image.asset(
               incomeCategoryIamges[category]!,
