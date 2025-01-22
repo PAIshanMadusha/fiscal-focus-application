@@ -18,7 +18,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _currentScreenIndex = 0;
+  int _currentScreenIndex = 3;
 
   List<Income> incomeList = [];
   List<Expence> expenceList = [];
@@ -53,7 +53,7 @@ class _MainScreenState extends State<MainScreen> {
   void addNewExpences(Expence newExpence) {
     ExpenceService().saveExpences(newExpence, context);
 
-  //Update Expense List
+    //Update Expense List
     setState(() {
       expenceList.add(newExpence);
     });
@@ -69,20 +69,49 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   //Function to remove a expense
-  void removeExpense (Expence expence){
+  void removeExpense(Expence expence) {
     ExpenceService().deleteExpense(expence.id, context);
     setState(() {
       expenceList.remove(expence);
     });
   }
+
   //Function to remove a income
-  void removeIncome(Income income){
+  void removeIncome(Income income) {
     IncomeService().deleteIncome(income.id, context);
     setState(() {
       incomeList.remove(income);
     });
   }
-
+  //Category total incomes
+  Map<IncomeCategory, double> calculateIncomeCategories() {
+    Map<IncomeCategory, double> categoryTotals = {
+      IncomeCategory.freelance: 0,
+      IncomeCategory.passive: 0,
+      IncomeCategory.salery: 0,
+      IncomeCategory.sales: 0,
+    };
+    for (Income income in incomeList) {
+      categoryTotals[income.category] =
+          categoryTotals[income.category]! + income.amount;
+    }
+    return categoryTotals;
+  }
+  //Category total expenses
+  Map<ExpenceCategory, double> calculateExpenseCategories() {
+    Map<ExpenceCategory, double> categoryTotals = {
+      ExpenceCategory.food: 0,
+      ExpenceCategory.health: 0,
+      ExpenceCategory.shopping: 0,
+      ExpenceCategory.subscriptions: 0,
+      ExpenceCategory.transport: 0,
+    };
+    for (Expence expence in expenceList) {
+      categoryTotals[expence.category] =
+          categoryTotals[expence.category]! + expence.amount;
+    }
+    return categoryTotals;
+  }
   @override
   Widget build(BuildContext context) {
     final List<Widget> screens = [
@@ -100,7 +129,10 @@ class _MainScreenState extends State<MainScreen> {
         addIncome: addNewIncomes,
         addExpense: addNewExpences,
       ),
-      BudgetScreen(),
+      BudgetScreen(
+        incomeCategoryTotal: calculateIncomeCategories(),
+        expenceCategoryTotal: calculateExpenseCategories(),
+      ),
       ProfileScreen(),
     ];
     return Scaffold(
