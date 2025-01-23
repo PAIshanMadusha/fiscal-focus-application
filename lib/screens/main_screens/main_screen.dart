@@ -18,7 +18,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _currentScreenIndex = 3;
+  int _currentScreenIndex = 0;
 
   List<Income> incomeList = [];
   List<Expence> expenceList = [];

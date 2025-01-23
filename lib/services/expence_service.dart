@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ExpenceService {
-  
   //Key for String expences in shared preferences
   static const String _expenceKey = 'expences';
 
@@ -107,6 +106,34 @@ class ExpenceService {
           content: Text("Error $error"),
         ),
       );
+    }
+  }
+
+  //Remove all expences from shardPreferences
+  Future<void> deleteAllExpenses(BuildContext context) async {
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      await pref.remove(_expenceKey);
+
+      //Show Message
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("All Expenses Deleted!"),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    } catch (error) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              "Error $error",
+            ),
+          ),
+        );
+      }
     }
   }
 }
