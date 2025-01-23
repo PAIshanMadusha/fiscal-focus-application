@@ -36,7 +36,6 @@ After logging in, users can navigate between the following pages:
   <img src="https://github.com/user-attachments/assets/54fb9767-6857-4a42-b7b1-124bdb142c3d" alt="Screenshot 3" width="175">&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/user-attachments/assets/f4f9f3f4-a4a0-4e40-b2a7-f294bccb1c98" alt="Screenshot 4" width="178">
 </p>
-<br><br>
 
 ---
 - **Main Screens:**
@@ -47,7 +46,7 @@ After logging in, users can navigate between the following pages:
 </p>
 <p align="center">
   <img src="https://github.com/user-attachments/assets/5310b17e-96f7-4e58-83c8-f06d36d741d9" alt="Screenshot 1" width="175">&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/user-attachments/assets/ad8d6c85-b08e-4c16-8426-a0e625633195" alt="Screenshot 2" width="175">&nbsp;&nbsp;&nbsp;
-  <img src="https://github.com/user-attachments/assets/b1afe39d-4cf9-4a93-91db-adc341d22581" alt="Screenshot 3" width="173">&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/ad8d6c85-b08e-4c16-8426-a0e625633195" alt="Screenshot 2" width="176">&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/user-attachments/assets/b1afe39d-4cf9-4a93-91db-adc341d22581" alt="Screenshot 3" width="174">&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/user-attachments/assets/2f4740ea-36b4-4b5f-981f-3e3d470f9c02" alt="Screenshot 4" width="173">
 </p>
