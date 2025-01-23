@@ -1,16 +1,30 @@
-# fiscal_focus_app
+# Flutter Fiscal Focus Application
 
-A new Flutter project.
+A user-friendly Flutter application designed to compare expenses and income, providing valuable financial insights and helping users maintain a balanced budget.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+### 1. **User Onboarding and Login**
+- Onboarding screens for new users.
+- Login form with test validation.
 
-A few resources to get you started if this is your first Flutter project:
+### 2. **Navigation Bar**
+After logging in, users can navigate between the following pages:
+- **Home:**
+  - Displays total income and expense amounts.
+  - Shows recently added expenses.
+- **Transaction:**
+- View income and expenses and delete them by dragging from start to end (using the Dismissible widget).
+- **Add:**
+  - Dedicated section to add new income or expense entries easily.
+- **Budget:**
+  - View income and expenses in two separate pie charts for better visualization.
+- **Profile:**
+  - Displays user profile details.
+- Includes a logout option that clears all user data and redirects to the onboarding screens.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 3. **Backend Functionality**
+- Data persistence is implemented using `SharedPreferences` to save and retrieve user details and transactions.
+- Logout functionality removes all saved data and ensures a fresh start for the next session.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 4. **System Screenshots**
