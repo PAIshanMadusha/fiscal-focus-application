@@ -149,12 +149,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          userName.toUpperCase(),
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: kLightGrey,
-                            fontSize: 26,
+                        SizedBox(
+                          child: Text(
+                            userName.toUpperCase(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: kLightGrey,
+                              fontSize: 26,
+                            ),
                           ),
                         ),
                         Text(

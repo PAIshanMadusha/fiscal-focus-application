@@ -92,12 +92,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
-                          Text(
-                            "WELCOME ${userName.toUpperCase()}",
-                            style: TextStyle(
-                              fontSize: 23,
-                              fontWeight: FontWeight.w800,
-                              color: kBlack,
+                          SizedBox(
+                            width: 250,
+                            child: Text(
+                              "WELCOME ${userName.toUpperCase()}",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w800,
+                                color: kBlack,
+                              ),
+                              textAlign: TextAlign.center,
+                              
                             ),
                           ),
                           IconButton(
